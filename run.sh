@@ -1,17 +1,15 @@
 #!/bin/sh
 
-ProjectDir=$(dirname $(readlink -v -f $(basename $0)))
+ScriptName="$(basename '$0')"
+FullPathToScript="$(readlink -v -f '$ScriptName')"
+ProjectDir="$(dirname '$FullPathToScript')"
 
-cd $ProjectDir
+unzip $ProjectDir/data/BX-CSV-Dump.zip -d $ProjectDir
 
-mv data/BX-CSV-Dump.zip $ProjectDir
+dos2unix $ProjectDir/*.csv   # CRLF to LF
 
-unzip $ProjectDir/BX-CSV-Dump.zip
-
-rm $ProjectDir/BX-CSV-Dump.zip
-
-dos2unix *.csv
-
-make
+make -C "$ProjectDir"
 
 ./combineCSV
+
+make -C "$ProjectDir" clean

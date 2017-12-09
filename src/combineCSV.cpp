@@ -79,7 +79,7 @@ int main() {
                 exit(1);
             }
         }
-        cout << "K: " << k << endl;
+        cout << "Skipped " << k << " records because of insuffient data" << endl;
     } catch (const string &s) {
         cout << s << endl;
     }
