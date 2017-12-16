@@ -3,7 +3,7 @@
 #include "./common.hpp"
 
 int main(int argc, char **argv) {
-    vector<int> columns;
+    vector<size_t> columns;
     while (true) {
         char option = getopt(argc, argv, "c:f:");
         if (option == -1)
@@ -19,10 +19,15 @@ int main(int argc, char **argv) {
                 CSV csv(optarg, ';', '\\');
                 if (columns.size() != 0) {
                     while (true) {
+                        bool f = 0;
                         vector<string> row = move(csv.getNextRow());
-                        for (int i = 0, k = 0; i < row.size(); ++i) {
+                        for (size_t i = 0, k = 0; i < row.size(); ++i) {
                             if (i + 1 == columns[k]) {
-                                cout << row[i] << ", ";
+                                if (f)
+                                    cout << row[i] << ", ";
+                                else
+                                    cout << row[i];
+                                f = 1;
                                 ++k;
                             }
                         }
