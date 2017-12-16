@@ -1,3 +1,6 @@
+#ifndef CSV_HPP
+#define CSV_HPP
+
 #include <map>
 #include <vector>
 #include <string>
@@ -55,6 +58,18 @@ public:
         file.seekg(0, ios::end);
         this->length = file.tellg();
         file.seekg(0, ios::beg);
+    }
+
+    long size() const { return this->length; }
+
+    long currentFilePos() {
+        if (this->file.tellg() < 0)
+            this->file.open(fileName, ios::in);
+        return this->file.tellg();
+    }
+
+    void close() {
+        file.close();
     }
 
     /* Write the contents of the vector into CSV file */
@@ -206,3 +221,5 @@ public:
         file.close();
     }
 };
+
+#endif // CSV_HPP

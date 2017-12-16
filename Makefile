@@ -2,7 +2,7 @@ CFLAGS = -std=c++14
 
 TARGETS = combineCSV displayCSV
 
-HEADERS = src/csv.hpp src/common.hpp
+HEADERS = src/csv.hpp src/common.hpp src/getGenre.hpp
 
 .PHONY: clean all
 
